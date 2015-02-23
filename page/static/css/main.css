@@ -1,0 +1,63 @@
+body {
+    background: url(../img/greyzz.png);
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    direction: ltr;
+}
+
+#upload-box {
+    padding: 10px 25px;
+    margin: 100px auto 0;
+    width: 350px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+#upload-box h2 {
+    text-align: center;
+    margin: 10px 0 20px;
+}
+#upload-box .progress {
+    visibility: hidden;
+    margin-top: 15px;
+}
+#upload-box .go {
+    display: block;
+    margin: 0 auto;
+}
+#upload-box .r{
+    margin: 10px 0;
+}
+.dropping #upload-box {
+    opacity: 0.5;
+}
+
+.drag-drop-msg {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -250px;
+    margin-top: -60px;
+    font-size: 80px;
+    letter-spacing: 15px;
+    text-shadow: -1px 1px #ddd;
+}
+.dropping .drag-drop-msg {
+    display: block;
+}
+
+.file-input-overlay{
+    position: relative;
+    overflow: hidden;
+}
+.file-input-overlay input{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    opacity: 0.0;
+    filter: alpha(opacity=0);
+    font-size: 50px;
+}
+.file-input-overlay button{
+    margin-bottom: 0;
+}

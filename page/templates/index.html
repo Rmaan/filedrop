@@ -4,13 +4,28 @@
     <meta charset="UTF-8">
     <title>File Drop</title>
     <link href="/static/css/bootstrap.css" rel="stylesheet">
-    <link href="/static/css/bootstrap-theme.css" rel="stylesheet">
+{#    <link href="/static/css/bootstrap-theme.css" rel="stylesheet">#}
     <link href="/static/css/main.css" rel="stylesheet">
 </head>
 <body>
-    <form>
-        <input type="text" name="student_id">
-        <input type="text" name="student_id">
-    </form>
+    <div id="upload-box">
+        <h2>SE Assignment 1</h2>
+        <div class="r"><input type="text" name="student_id" placeholder="Student no."></div>
+        <div class="r"><input type="email" name="email" placeholder="Email"></div>
+        <div class="r"><div class="file-input-overlay">
+            <input type="file">
+            <button class="btn btn-sm btn-default">Choose File</button>
+            <span class="filename"></span>
+        </div></div>
+        <button class="btn btn-primary go" type="button">Go!</button>
+        <div class="progress"><div class="progress-bar progress-bar-success"></div></div>
+    </div>
+    <div class="drag-drop-msg">Drop Here!</div>
+
+<script src="/static/js/jquery-1.11.2.js"></script>
+<script src="/static/js/jquery-ui.widget.js"></script>
+<script src="/static/js/jquery.iframe-transport.js"></script>
+<script src="/static/js/jquery.fileupload.js"></script>
+<script src="/static/js/home.js"></script>
 </body>
 </html>
