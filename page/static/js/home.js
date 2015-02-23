@@ -1,33 +1,57 @@
 $(function() {
-    var $box = $('#upload-box')
+    var $box = $('#upload-box').show()
 //    var $input = $box.find('input[type=file]')
     var $progress = $box.find('.progress')
     var $html = $('html')
     var frmToSubmit
 
-    $box.find('button.go').click(function() {
+    $box.submit(function(ev) {
+        ev.preventDefault()
+
+        var incomplete = false
+        $box.find('input[name]').each(function() {
+            if (!$(this).val())
+                incomplete = true
+        })
+        if (incomplete || !frmToSubmit) {
+            alert('Please fill all fields!')
+            return
+        }
         $progress.css('visibility', 'visible')
         frmToSubmit.submit()
     })
 
     var ACCEPT_FILE_TYPE = /^application\/(x-)?pdf$/i
-    var MAX_FILE_SIZE = 15000 * 1024 * 1024
+    var MAX_FILE_SIZE = 15 * 1024 * 1024
 
     $box.fileupload({
         dropZone: $html,
         pasteZone: $html,
         url: '/api/upload/',
-
         paramName: 'file',  // http POST parameter name
-        dataType: 'json',
+        dataType: 'json',  // data type sent from server
+
+        formData: function() {
+            var data = $box.find('input[name]').map(function() {
+                return {
+                    name: $(this).attr('name'),
+                    value: $(this).val()
+                }
+            })
+//            data.push({
+//                name: 'assignment',
+//                value: 1
+//            })
+            return data
+        },
 
         add: function(e, data) {
             var error = ""
             var f = data.originalFiles[0]
             if(f.type && !ACCEPT_FILE_TYPE.test(f.type))
-                error = 'File type is not valid'
+                error = 'File type is not valid.'
             else if(f.size && f.size > MAX_FILE_SIZE)
-                error = 'File is too big'
+                error = 'File is too big.'
 
             if (error) {
                 alert(f.name + ': ' + error)
@@ -52,6 +76,17 @@ $(function() {
 
         progress: function(e, data) {
             $progress.find('.progress-bar').css('width', (data.loaded / data.total * 100) + '%')
+        },
+
+        done: function(e, data) {
+            if (data.result.error) {
+                var list = data.result.error
+                var k = Object.keys(list)[0]
+                var msg = /*k + ':\n' + */ list[k].join('\n')
+                alert(msg)
+            } else {
+                alert('ok!')
+            }
         }
     })
 

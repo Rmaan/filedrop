@@ -8,18 +8,18 @@
     <link href="/static/css/main.css" rel="stylesheet">
 </head>
 <body>
-    <div id="upload-box">
+    <form id="upload-box" style="display: none">
         <h2>SE Assignment 1</h2>
-        <div class="r"><input type="text" name="student_id" placeholder="Student no."></div>
+        <div class="r"><input type="text" name="student_no" placeholder="Student no."></div>
         <div class="r"><input type="email" name="email" placeholder="Email"></div>
         <div class="r"><div class="file-input-overlay">
             <input type="file">
             <button class="btn btn-sm btn-default">Choose File</button>
             <span class="filename"></span>
         </div></div>
-        <button class="btn btn-primary go" type="button">Go!</button>
+        <input class="btn btn-primary go" type="submit" value="Go!">
         <div class="progress"><div class="progress-bar progress-bar-success"></div></div>
-    </div>
+    </form>
     <div class="drag-drop-msg">Drop Here!</div>
 
 <script src="/static/js/jquery-1.11.2.js"></script>

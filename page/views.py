@@ -1,10 +1,14 @@
 from django import forms
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import time
+from page.models import Submit, Assignment
 
 
-class UploadFileForm(forms.Form):
-    file = forms.FileField()
+class UploadFileForm(forms.ModelForm):
+    class Meta:
+        model = Submit
+        fields = ['email', 'student_no', 'file']
 
 
 @csrf_exempt
@@ -13,8 +17,11 @@ def upload(request):
     frm = UploadFileForm(request.POST, request.FILES)
     if not frm.is_valid():
         return JsonResponse({'error': frm.errors})
-    file = request.FILES['file']
-    # s = StoredImage(albumTag=1, filename=file.name, originalImage=file)
+
+    submit = frm.save(commit=False)
+    submit.assignment, _ = Assignment.objects.get_or_create(name='HW1')
+    submit.time = time.time()
+    submit.save()
 
     res = JsonResponse({'success': True})
     if 'application/json' not in request.META['HTTP_ACCEPT']:
