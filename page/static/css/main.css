@@ -2,7 +2,7 @@ body {
     background: url(../img/greyzz.png);
     /*font-family: Arial, Helvetica, sans-serif;*/
     direction: ltr;
-    padding-top: 100px;
+    padding: 100px 0;
 }
 
 body > h2 {
@@ -68,7 +68,7 @@ body > h2 {
 }
 
 #points {
-    padding: 20px;
+    padding: 40px 20px;
 }
 #points ul {
     padding-left: 0;

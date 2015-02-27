@@ -115,8 +115,8 @@ $(function() {
 })
 
 $(function() {
-//    var deadlineStamp = 1425932999000
-    var deadlineStamp = 1425068999000 // - 2 * 60 * 60 * 1000
+    var deadlineStamp = 1425932999000
+//    var deadlineStamp = 1425068999000 - 0.5 * 60 * 60 * 1000
     var $deadline = $('#deadline')
 
     function durationInWords(timeInSeconds) {
@@ -125,14 +125,20 @@ $(function() {
         var hours = Math.floor(minutes / 60)
         var days = Math.floor(hours / 24)
 
+        function format(x, strx) {
+            if (x == 0)
+                return ''
+            return x + ' ' + (x == 1 ? strx : strx + 's')
+        }
+
         if (seconds < 60)
             return 'Less than a minute'
         else if (minutes < 60)
-            return minutes + ' minutes ' + (seconds % 60) + ' seconds'
+            return format(minutes, 'minute') + ' ' + format(seconds % 60, 'second')
         else if (hours < 24)
-            return hours + ' hours ' + (minutes % 60) + ' minutes'
+            return format(hours, 'hour') + ' ' + format(minutes % 60, 'minutes')
         else
-            return days + ' days ' + (hours % 24) + ' hours'
+            return format(days, 'day') + ' ' + format(hours % 24, 'hour')
     }
 
     function refreshDeadline() {
@@ -144,5 +150,5 @@ $(function() {
     }
 
     refreshDeadline()
-    setInterval(refreshDeadline, 900)
+    setInterval(refreshDeadline, 1000)
 })
