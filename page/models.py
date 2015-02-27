@@ -19,6 +19,6 @@ class Assignment(models.Model):
 class Submit(models.Model):
     assignment = models.ForeignKey(Assignment)
     email = models.EmailField(max_length=250, null=True, blank=True)
-    student_no = models.CharField(max_length=8, validators=[sharif_student_no_validator])
+    student_no = models.CharField(max_length=10, validators=[sharif_student_no_validator])
     time = models.IntegerField()
     file = models.FileField(upload_to='submits')

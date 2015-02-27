@@ -2,14 +2,18 @@ body {
     background: url(../img/greyzz.png);
     /*font-family: Arial, Helvetica, sans-serif;*/
     direction: ltr;
+    padding-top: 100px;
+}
+
+body > h2 {
+    text-align: center;
 }
 
 #upload-box {
     padding: 10px 25px;
-    margin: 100px auto 0;
-    width: 350px;
     border: 1px solid #ddd;
     border-radius: 10px;
+    background: #fcfcfc;
 }
 #upload-box h2 {
     text-align: center;
@@ -26,7 +30,8 @@ body {
 #upload-box .r{
     margin: 10px 0;
 }
-.dropping #upload-box {
+
+.dropping .container {
     opacity: 0.5;
 }
 
@@ -35,8 +40,8 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -250px;
-    margin-top: -60px;
+    margin-left: -135px;
+    margin-top: -57px;
     font-size: 80px;
     letter-spacing: 15px;
     text-shadow: -1px 1px #ddd;
@@ -60,4 +65,23 @@ body {
 }
 .file-input-overlay button{
     margin-bottom: 0;
+}
+
+#points {
+    padding: 20px;
+}
+#points ul {
+    padding-left: 0;
+}
+#points li {
+    margin-bottom: 10px;
+}
+
+#deadline {
+    text-align: center;
+    font-size: 23px;
+    font-family: sans-serif;
+}
+#deadline.negative{
+    color: #f00;
 }

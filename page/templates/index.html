@@ -10,7 +10,10 @@
     <!-- endbuild -->
 </head>
 <body>
-    <form id="upload-box" style="display: none">
+<h2>Loading</h2>
+<div class="container" style="display: none"><div class="row">
+
+    <form id="upload-box" class="col-md-offset-2 col-md-4 col-sm-6">
         <h2>SE Assignment 1</h2>
         <div class="r"><input type="text" name="student_no" placeholder="Student no."></div>
         <div class="r"><input type="email" name="email" placeholder="Email"></div>
@@ -22,7 +25,20 @@
         <input class="btn btn-primary go" type="submit" value="Go!">
         <div class="progress"><div class="progress-bar progress-bar-success"></div></div>
     </form>
-    <div class="drag-drop-msg">Drop Here!</div>
+
+    <div class="col-sm-6">
+        <div id="deadline"></div>
+
+        <div id="points"><ul>
+            <li>Microsoft Word files are not allowed. Convert to PDF before submitting.</li>
+            <li>Multiple submits for one student are preserved.</li>
+            <li>Don't postpone sending your assignment till last minutes!</li>
+            <li>You could drag'n drop files here too.</li>
+        </ul></div>
+    </div>
+</div></div>
+
+<div class="drag-drop-msg">Drop!</div>
 
 <!-- build:js static/js/all.js -->
 <script src="/static/js/jquery-1.11.2.js"></script>

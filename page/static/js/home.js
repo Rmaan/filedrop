@@ -1,7 +1,13 @@
+"use strict";
+
 $(function() {
-    var $box = $('#upload-box').show()
+    $('.container').show()
+    $('body > h2').remove()
+
+    var $box = $('#upload-box')
 //    var $input = $box.find('input[type=file]')
     var $progress = $box.find('.progress')
+    var $doc = $(document)
     var $html = $('html')
     var frmToSubmit
 
@@ -25,8 +31,8 @@ $(function() {
     var MAX_FILE_SIZE = 15 * 1024 * 1024
 
     $box.fileupload({
-        dropZone: $html,
-        pasteZone: $html,
+//        dropZone: $html,
+//        pasteZone: $html,
         url: '/api/upload/',
         paramName: 'file',  // http POST parameter name
         dataType: 'json',  // data type sent from server
@@ -49,7 +55,7 @@ $(function() {
             var error = ""
             var f = data.originalFiles[0]
             if(f.type && !ACCEPT_FILE_TYPE.test(f.type))
-                error = 'File type is not valid.'
+                error = 'Only PDF files are allowed.'
             else if(f.size && f.size > MAX_FILE_SIZE)
                 error = 'File is too big.'
 
@@ -90,11 +96,53 @@ $(function() {
         }
     })
 
-    $html.on('dragover', function (e) {
+    var removeDroppingTimeout
+    $doc.on('dragover', function (e) {
         $html.addClass('dropping')
+
+        clearTimeout(removeDroppingTimeout)
+        removeDroppingTimeout = setTimeout(function() {
+            $html.removeClass('dropping')
+        }, 100)
+
+//        e.preventDefault()
     })
 
-    $html.on('dragleave drop', function (e) {
-        $html.removeClass('dropping')
-    })
+//    $doc.on('dragleave drop', function (e) {
+////        $html.removeClass('dropping')
+//        e.preventDefault()
+//    })
+})
+
+$(function() {
+//    var deadlineStamp = 1425932999000
+    var deadlineStamp = 1425068999000 // - 2 * 60 * 60 * 1000
+    var $deadline = $('#deadline')
+
+    function durationInWords(timeInSeconds) {
+        var seconds = Math.floor(Math.abs(timeInSeconds))
+        var minutes = Math.floor(seconds / 60)
+        var hours = Math.floor(minutes / 60)
+        var days = Math.floor(hours / 24)
+
+        if (seconds < 60)
+            return 'Less than a minute'
+        else if (minutes < 60)
+            return minutes + ' minutes ' + (seconds % 60) + ' seconds'
+        else if (hours < 24)
+            return hours + ' hours ' + (minutes % 60) + ' minutes'
+        else
+            return days + ' days ' + (hours % 24) + ' hours'
+    }
+
+    function refreshDeadline() {
+        var diff = (deadlineStamp - new Date()) / 1000
+        var s = durationInWords(diff)
+        var passed = diff < 0
+        s += (passed ? ' passed' : ' remaining')
+        $deadline.html(s).toggleClass('negative', passed)
+    }
+
+    refreshDeadline()
+    setInterval(refreshDeadline, 900)
 })
