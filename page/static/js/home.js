@@ -1,7 +1,7 @@
 "use strict";
 
 $(function() {
-    $('.container').show()
+    var $container = $('.container').show()
     $('body > h2').remove()
 
     var $box = $('#upload-box')
@@ -20,7 +20,7 @@ $(function() {
                 incomplete = true
         })
         if (incomplete || !frmToSubmit) {
-            alert('Please fill all fields!')
+            Alert.warning('Please fill all fields!')
             return
         }
         $progress.css('visibility', 'visible')
@@ -60,7 +60,7 @@ $(function() {
                 error = 'File is too big.'
 
             if (error) {
-                alert(f.name + ': ' + error)
+                Alert.warning(f.name + ': ' + error)
                 return
             }
 
@@ -70,7 +70,7 @@ $(function() {
         },
 
         fail: function(e, data) {
-            alert('Upload failed [' + data.textStatus + ']\n' + data.errorThrown)
+            Alert.warning('Upload failed [' + data.textStatus + ']\n' + data.errorThrown)
         },
 
         always: function() {
@@ -89,9 +89,10 @@ $(function() {
                 var list = data.result.error
                 var k = Object.keys(list)[0]
                 var msg = /*k + ':\n' + */ list[k].join('\n')
-                alert(msg)
+                Alert.warning(msg)
             } else {
-                alert('ok!')
+                Alert.success('Your file has been uploaded.')
+                $container.hide()
             }
         }
     })
@@ -151,4 +152,30 @@ $(function() {
 
     refreshDeadline()
     setInterval(refreshDeadline, 1000)
+})
+
+$(function() {
+    var $alert = $('<div>').addClass('notif').appendTo('body')
+    var $success = $('<div class="alert alert-success"></div>')
+    var $waring = $('<div class="alert alert-danger"></div>')
+    var hideTimeout
+
+    function show($div, msgHtml) {
+        $alert.empty().show()
+        $div.html(msgHtml).appendTo($alert)
+        clearTimeout(hideTimeout)
+        hideTimeout = setTimeout(function() {
+            $alert.hide()
+        }, 10 * 1000)
+    }
+
+    window.Alert = {
+        success: function(msgHtml) {
+            show($success, msgHtml)
+        },
+
+        warning: function(msgHtml) {
+            show($waring, msgHtml)
+        }
+    }
 })
