@@ -91,7 +91,7 @@ $(function() {
                 var msg = /*k + ':\n' + */ list[k].join('\n')
                 Alert.warning(msg)
             } else {
-                Alert.success('Your file has been uploaded.')
+                Alert.success('Your file has been uploaded.', 3600 * 1000)
                 $container.hide()
             }
         }
@@ -160,22 +160,22 @@ $(function() {
     var $waring = $('<div class="alert alert-danger"></div>')
     var hideTimeout
 
-    function show($div, msgHtml) {
+    function show($div, msgHtml, delay) {
         $alert.empty().show()
         $div.html(msgHtml).appendTo($alert)
         clearTimeout(hideTimeout)
         hideTimeout = setTimeout(function() {
             $alert.hide()
-        }, 10 * 1000)
+        }, delay || 10 * 1000)
     }
 
     window.Alert = {
-        success: function(msgHtml) {
-            show($success, msgHtml)
+        success: function(msgHtml, delay) {
+            show($success, msgHtml, delay)
         },
 
-        warning: function(msgHtml) {
-            show($waring, msgHtml)
+        warning: function(msgHtml, delay) {
+            show($waring, msgHtml, delay)
         }
     }
 })
