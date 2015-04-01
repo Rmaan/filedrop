@@ -29,7 +29,7 @@ class Command(BaseCommand):
         dir = media_root + '/result/' + assignment_name
         try:
             shutil.rmtree(dir)
-        except (IOError, WindowsError):
+        except (IOError, OSError):
             pass
 
         for student_no in submits.keys():
