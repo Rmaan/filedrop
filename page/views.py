@@ -19,7 +19,7 @@ def upload(request):
         return JsonResponse({'error': frm.errors})
 
     submit = frm.save(commit=False)
-    submit.assignment, _ = Assignment.objects.get_or_create(name='HW2')
+    submit.assignment, _ = Assignment.objects.get_or_create(name='HW3')
     submit.time = time.time()
     submit.save()
 
