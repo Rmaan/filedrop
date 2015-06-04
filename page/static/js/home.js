@@ -116,7 +116,7 @@ $(function() {
 })
 
 $(function() {
-    var deadlineStamp = 1433532599000
+    var deadlineStamp = 1434396599000
 //    var deadlineStamp = 1425068999000 - 0.5 * 60 * 60 * 1000
     var $deadline = $('#deadline')
 
