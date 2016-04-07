@@ -18,6 +18,7 @@ class Command(BaseCommand):
         # tof tof tof
         deadline = {
             'HW1': 1457382599,
+            'HW2': 1460233799,
         }[assignment_name]
 
         media_root = settings.MEDIA_ROOT
