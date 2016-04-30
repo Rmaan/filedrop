@@ -21,4 +21,4 @@ class Submit(models.Model):
     email = models.EmailField(max_length=250, null=True, blank=True)
     student_no = models.CharField(max_length=10, validators=[sharif_student_no_validator])
     time = models.IntegerField()
-    file = models.FileField(upload_to='submits')
+    file = models.FileField(upload_to=u'submits')
