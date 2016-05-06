@@ -19,7 +19,7 @@ class Command(BaseCommand):
         deadline = {
             'HW1': 1457382599,
             'HW2': 1460316599,
-            'HW3': 1462217399,
+            'HW3': 1462562999,
         }[assignment_name]
 
         media_root = settings.MEDIA_ROOT
